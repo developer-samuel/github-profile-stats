@@ -33,8 +33,12 @@ type-check:
 dead-code:
     uv run vulture src/
 
+# Lint YAML files
+yaml-check:
+    yamllint .github/workflows/
+
 # Run all checks (same as CI)
-check: lint format-check type-check dead-code
+check: lint format-check type-check dead-code yaml-check
 
 # Auto-fix lint issues + format
 fix:

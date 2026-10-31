@@ -1,0 +1,44 @@
+name: 🔬 SAST
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 2 * * 1'  # Every Monday at 02:00 UTC
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs:
+  semgrep:
+    name: 🔬 Semgrep (Python)
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      security-events: write
+
+    container:
+      image: semgrep/semgrep:1.183.0@sha256:2e45517a85e13a9cca14a2a00df6bb48affd66b8ebfae1b0991cd57578362fb0
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+
+      - name: Run Semgrep
+        run: |
+          semgrep \
+            --config p/python \
+            --config p/secrets \
+            --sarif \
+            --output semgrep.sarif \
+            --error \
+            src/
+
+      - name: Upload SARIF
+        uses: github/codeql-action/upload-sarif@5c8ea125689a2c5ae2672d1d914ac4bcd95d1b4b  # v3
+        if: always()
+        with:
+          sarif_file: semgrep.sarif
+          category: semgrep
