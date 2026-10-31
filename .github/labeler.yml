@@ -1,0 +1,28 @@
+source:
+  - changed-files:
+      - any-glob-to-any-file: 'src/**'
+
+action:
+  - changed-files:
+      - any-glob-to-any-file: 'action.yml'
+
+ci/cd:
+  - changed-files:
+      - any-glob-to-any-file: '.github/workflows/**'
+
+code-quality:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'pyproject.toml'
+          - '.yamllint.yml'
+          - 'Justfile'
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: '*.md'
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'uv.lock'
+          - 'renovate.json'

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":automergeMinor"
+  ],
+  "timezone": "Europe/Bratislava",
+  "schedule": ["before 6am on monday"],
+  "labels": ["dependencies"],
+  "assignees": ["developer-samuel"],
+  "minimumReleaseAge": "7 days",
+  "packageRules": [
+    {
+      "description": "Group all GitHub Actions updates together",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions",
+      "automerge": true
+    },
+    {
+      "description": "Group Python dev dependencies together",
+      "matchManagers": ["uv"],
+      "groupName": "Python dev dependencies",
+      "automerge": true
+    },
+    {
+      "description": "Major updates - never automerge",
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "labels": ["dependencies", "breaking-change"]
+    }
+  ],
+  "enabledManagers": ["github-actions", "uv", "docker"]
+}
