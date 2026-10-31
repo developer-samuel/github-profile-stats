@@ -22,7 +22,7 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
 ## Setup
 
 ```bash
-just sync
+just setup
 ```
 
 ## Tasks
@@ -30,6 +30,7 @@ just sync
 | Command             | Description                      |
 |---------------------|----------------------------------|
 | `just sync`         | Install dev dependencies         |
+| `just setup`        | First-time setup (deps + hooks)  |
 | `just lint`         | Lint with Ruff                   |
 | `just format`       | Format source code               |
 | `just format-check` | Check formatting without writing |
