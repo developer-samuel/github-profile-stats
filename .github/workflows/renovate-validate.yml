@@ -1,0 +1,27 @@
+name: 🔄 Renovate Config Validate
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'renovate.json'
+      - 'renovate.json5'
+      - '.renovaterc'
+      - '.renovaterc.json'
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs:
+  validate:
+    name: 🔄 Validate Renovate config
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+
+      - name: Validate renovate.json
+        run: npx --package renovate --yes renovate-config-validator
