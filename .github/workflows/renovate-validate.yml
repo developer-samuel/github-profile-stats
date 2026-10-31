@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - 'renovate.json'
+      - 'renovate.json5'
+      - '.renovaterc'
+      - '.renovaterc.json'
   workflow_dispatch:
 
 permissions: read-all
