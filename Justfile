@@ -35,7 +35,7 @@ dead-code:
 
 # Lint YAML files
 yaml-check:
-    yamllint .github/workflows/
+    yamllint -c .yamllint.yml .github/workflows/
 
 # Run all checks (same as CI)
 check: lint format-check type-check dead-code yaml-check
