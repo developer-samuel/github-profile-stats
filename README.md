@@ -1,4 +1,4 @@
-# GitHub Profile Stats
+# GitHub Stats Generator
 
 Generates SVG stats and metrics cards for your GitHub profile README.
 

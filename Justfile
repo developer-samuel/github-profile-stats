@@ -1,4 +1,4 @@
-# GitHub Profile Stats - task runner
+# GitHub Stats Generator - task runner
 # Requires: just (https://github.com/casey/just) + uv
 
 # List available commands
