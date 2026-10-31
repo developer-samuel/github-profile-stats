@@ -25,6 +25,14 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
 just setup
 ```
 
+## Repository secrets
+
+The following secrets must be configured in **Settings → Secrets and variables → Actions**:
+
+| Secret        | Description                                                                 |
+|---------------|-----------------------------------------------------------------------------|
+| `PAT_TOKEN`   | Classic PAT with `repo` scope - used by release.yml to push CHANGELOG.md to main |
+
 ## Dependency updates
 
 Dependencies are managed by [Renovate](https://github.com/apps/renovate). It runs every Monday before 6:00 AM and opens PRs for outdated GitHub Actions, Python dev dependencies and the Semgrep Docker image. Major updates require manual review.
