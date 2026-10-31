@@ -1,0 +1,69 @@
+[project]
+name = "github-profile-stats"
+version = "0.1.0"
+description = "GitHub Action for generating SVG stats and metrics cards"
+requires-python = ">=3.12"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.13",
+    "ruff>=0.8",
+    "vulture>=2.13",
+]
+
+# ---------------------------------------------------------------------------
+# Ruff - linter + formatter
+# ---------------------------------------------------------------------------
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "F",    # pyflakes
+    "I",    # isort
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "SIM",  # flake8-simplify
+    "A",    # flake8-builtins (catches variable shadowing)
+    "C4",   # flake8-comprehensions
+]
+ignore = [
+    "E501",
+    "SIM115",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"src/stats/generate.py"   = ["E402"]
+"src/metrics/generate.py" = ["E402"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+# ---------------------------------------------------------------------------
+# Mypy - static type checking
+# ---------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.12"
+mypy_path = "src"
+explicit_package_bases = true
+ignore_missing_imports = true
+disallow_untyped_defs = true
+disallow_any_generics = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+
+[[tool.mypy.overrides]]
+module = ["stats.generate", "metrics.generate"]
+ignore_errors = true
+
+# ---------------------------------------------------------------------------
+# Vulture - dead code detection
+# ---------------------------------------------------------------------------
+[tool.vulture]
+min_confidence = 80
+paths = ["src"]
