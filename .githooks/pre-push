@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+echo "🔍 Running checks before push..."
+just check
+echo "✅ All checks passed."

@@ -9,6 +9,10 @@ default:
 sync:
     uv sync --group dev
 
+# First-time setup (install deps + configure git hooks)
+setup: sync
+    git config core.hooksPath .githooks
+
 # Lint with Ruff
 lint:
     uv run ruff check src/
