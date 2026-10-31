@@ -1,16 +1,18 @@
-import os, sys
+import os
+import sys
 from datetime import date, timedelta
-from github_api import get_start_year, fetch_contributions
+
+from github_api import fetch_contributions, get_start_year
 from themes import resolve_colors
 
 username = os.environ["INPUT_USERNAME"]
 out_file = os.environ.get("INPUT_METRICS_FILE", "assets/metrics.svg")
-c        = resolve_colors()
+c = resolve_colors()
 primary, bg, text, muted, divider = c["primary"], c["bg"], c["text"], c["muted"], c["divider"]
 
-today      = date.today()
+today = date.today()
 start_year = get_start_year(username)
-all_days   = fetch_contributions(username, start_year)
+all_days = fetch_contributions(username, start_year)
 
 if not all_days:
     print("No data fetched", file=sys.stderr)
@@ -51,9 +53,9 @@ font = "'Courier New', Courier, monospace"
 
 blocks = [
     ("current streak", str(current_streak), "days"),
-    ("best streak",    str(best_streak),    "days"),
-    ("highest / day",  str(highest_day),    "commits"),
-    ("avg / day",      str(avg_per_day),    "commits"),
+    ("best streak", str(best_streak), "days"),
+    ("highest / day", str(highest_day), "commits"),
+    ("avg / day", str(avg_per_day), "commits"),
 ]
 
 count = len(blocks)
@@ -64,7 +66,9 @@ svg_h = 80
 dividers_svg = ""
 for i in range(1, count):
     x = col_w * i
-    dividers_svg += f'\n  <line x1="{x}" y1="10" x2="{x}" y2="70" stroke="{divider}" stroke-width="1"/>'
+    dividers_svg += (
+        f'\n  <line x1="{x}" y1="10" x2="{x}" y2="70" stroke="{divider}" stroke-width="1"/>'
+    )
 
 items_svg = ""
 for i, (label, value, unit) in enumerate(blocks):

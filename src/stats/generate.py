@@ -1,19 +1,20 @@
-import os, sys
+import os
 from datetime import date
-from github_api import get_start_year, fetch_total_commits, fetch_total_stars
+
+from github_api import fetch_total_commits, fetch_total_stars, get_start_year
 from themes import resolve_colors
 
-username      = os.environ["INPUT_USERNAME"]
+username = os.environ["INPUT_USERNAME"]
 start_date_in = os.environ.get("INPUT_START_DATE", "").strip()
-out_file      = os.environ.get("INPUT_STATS_FILE", "assets/stats.svg")
-c             = resolve_colors()
+out_file = os.environ.get("INPUT_STATS_FILE", "assets/stats.svg")
+c = resolve_colors()
 primary, bg, text, muted = c["primary"], c["bg"], c["text"], c["muted"]
 
 account_start_year = get_start_year(username)
 total_commits = fetch_total_commits(username, account_start_year)
-total_stars   = fetch_total_stars(username)
-commits_fmt   = f"{total_commits:,}"
-stars_fmt     = f"{total_stars:,}"
+total_stars = fetch_total_stars(username)
+commits_fmt = f"{total_commits:,}"
+stars_fmt = f"{total_stars:,}"
 
 font = "'Courier New', Courier, monospace"
 
@@ -29,10 +30,10 @@ if start_date_in:
 blocks.append(("commits", commits_fmt))
 blocks.append(("stars", stars_fmt))
 
-count  = len(blocks)
-width  = 820
-col_w  = width // count
-svg_h  = 80
+count = len(blocks)
+width = 820
+col_w = width // count
+svg_h = 80
 
 items_svg = ""
 for i, (label, value) in enumerate(blocks):
@@ -44,7 +45,9 @@ for i, (label, value) in enumerate(blocks):
 dividers_svg = ""
 for i in range(1, count):
     x = col_w * i
-    dividers_svg += f'\n  <line x1="{x}" y1="10" x2="{x}" y2="70" stroke="{c["divider"]}" stroke-width="1"/>'
+    dividers_svg += (
+        f'\n  <line x1="{x}" y1="10" x2="{x}" y2="70" stroke="{c["divider"]}" stroke-width="1"/>'
+    )
 
 svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {svg_h}" width="100%">
   <rect width="{width}" height="{svg_h}" fill="{bg}"/>{dividers_svg}{items_svg}
