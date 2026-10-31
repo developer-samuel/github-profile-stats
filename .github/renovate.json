@@ -31,13 +31,5 @@
       "labels": ["dependencies", "breaking-change"]
     }
   ],
-  "github-actions": {
-    "enabled": true
-  },
-  "uv": {
-    "enabled": true
-  },
-  "docker": {
-    "enabled": true
-  }
+  "enabledManagers": ["github-actions", "uv", "docker"]
 }
