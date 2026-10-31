@@ -42,7 +42,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: developer-samuel/github-profile-stats@v1  # https://github.com/developer-samuel/github-profile-stats/releases
+      - uses: developer-samuel/github-stats-generator@v1  # https://github.com/developer-samuel/github-stats-generator/releases
         with:
           token: ${{ secrets.STATS_TOKEN }}
           username: your-username

@@ -1,5 +1,5 @@
 [project]
-name = "github-profile-stats"
+name = "github-stats-generator"
 version = "0.1.0"
 description = "GitHub Action for generating SVG stats and metrics cards"
 requires-python = ">=3.12"
