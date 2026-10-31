@@ -36,5 +36,6 @@ just setup
 | `just format-check` | Check formatting without writing |
 | `just type-check`   | Static type checking with Mypy   |
 | `just dead-code`    | Dead code detection with Vulture |
+| `just yaml-check`   | Lint YAML files                  |
 | `just check`        | Run all checks (same as CI)      |
 | `just fix`          | Auto-fix lint issues + format    |
