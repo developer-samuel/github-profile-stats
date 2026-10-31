@@ -25,6 +25,12 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
 just setup
 ```
 
+## Dependency updates
+
+Dependencies are managed by [Renovate](https://github.com/apps/renovate). It runs every Monday before 6:00 AM and opens PRs for outdated GitHub Actions, Python dev dependencies and the Semgrep Docker image. Major updates require manual review.
+
+To activate Renovate for this repository go to [github.com/apps/renovate](https://github.com/apps/renovate).
+
 ## Tasks
 
 | Command             | Description                      |
