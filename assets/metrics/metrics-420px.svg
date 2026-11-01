@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 538" width="360" height="538">
+  <rect width="360" height="538" fill="none"/>
+  <text font-family="'Courier New', Courier, monospace" x="180" y="31" text-anchor="middle" fill="#484f58" font-size="16">current streak</text>
+  <text font-family="'Courier New', Courier, monospace" x="180" y="81" text-anchor="middle" fill="#01ff5e" font-size="48" font-weight="bold">2</text>
+  <text font-family="'Courier New', Courier, monospace" x="180" y="107" text-anchor="middle" fill="#8b949e" font-size="14">days</text>
+  <text font-family="'Courier New', Courier, monospace" x="180" y="168" text-anchor="middle" fill="#484f58" font-size="16">best streak</text>
+  <text font-family="'Courier New', Courier, monospace" x="180" y="218" text-anchor="middle" fill="#01ff5e" font-size="48" font-weight="bold">14</text>
+  <text font-family="'Courier New', Courier, monospace" x="180" y="244" text-anchor="middle" fill="#8b949e" font-size="14">days</text>
+  <text font-family="'Courier New', Courier, monospace" x="180" y="305" text-anchor="middle" fill="#484f58" font-size="16">highest / day</text>
+  <text font-family="'Courier New', Courier, monospace" x="180" y="355" text-anchor="middle" fill="#01ff5e" font-size="48" font-weight="bold">168</text>
+  <text font-family="'Courier New', Courier, monospace" x="180" y="381" text-anchor="middle" fill="#8b949e" font-size="14">commits</text>
+  <text font-family="'Courier New', Courier, monospace" x="180" y="442" text-anchor="middle" fill="#484f58" font-size="16">avg / day</text>
+  <text font-family="'Courier New', Courier, monospace" x="180" y="492" text-anchor="middle" fill="#01ff5e" font-size="48" font-weight="bold">7.2</text>
+  <text font-family="'Courier New', Courier, monospace" x="180" y="518" text-anchor="middle" fill="#8b949e" font-size="14">commits</text>
+</svg>
