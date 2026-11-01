@@ -49,35 +49,44 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: ./actions/generate-stats
-      with:
-        token: ${{ inputs.token }}
-        username: ${{ inputs.username }}
-        start_date: ${{ inputs.start_date }}
-        output_dir: ${{ inputs.output_dir }}
-        theme: ${{ inputs.theme }}
-        primary_color: ${{ inputs.primary_color }}
-        bg_color: ${{ inputs.bg_color }}
-        text_color: ${{ inputs.text_color }}
-        muted_color: ${{ inputs.muted_color }}
-        divider_color: ${{ inputs.divider_color }}
+    - name: Generate stats SVG
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+        INPUT_USERNAME: ${{ inputs.username }}
+        INPUT_START_DATE: ${{ inputs.start_date }}
+        INPUT_THEME: ${{ inputs.theme }}
+        INPUT_PRIMARY_COLOR: ${{ inputs.primary_color }}
+        INPUT_BG_COLOR: ${{ inputs.bg_color }}
+        INPUT_TEXT_COLOR: ${{ inputs.text_color }}
+        INPUT_MUTED_COLOR: ${{ inputs.muted_color }}
+        INPUT_DIVIDER_COLOR: ${{ inputs.divider_color }}
+        INPUT_OUTPUT_DIR: ${{ inputs.output_dir }}
+      run: PYTHONPATH=${{ github.action_path }}/src python3 ${{ github.action_path }}/src/stats/generate.py
 
-    - uses: ./actions/generate-metrics
-      with:
-        token: ${{ inputs.token }}
-        username: ${{ inputs.username }}
-        output_dir: ${{ inputs.output_dir }}
-        theme: ${{ inputs.theme }}
-        primary_color: ${{ inputs.primary_color }}
-        bg_color: ${{ inputs.bg_color }}
-        text_color: ${{ inputs.text_color }}
-        muted_color: ${{ inputs.muted_color }}
-        divider_color: ${{ inputs.divider_color }}
+    - name: Generate metrics SVG
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+        INPUT_USERNAME: ${{ inputs.username }}
+        INPUT_THEME: ${{ inputs.theme }}
+        INPUT_PRIMARY_COLOR: ${{ inputs.primary_color }}
+        INPUT_BG_COLOR: ${{ inputs.bg_color }}
+        INPUT_TEXT_COLOR: ${{ inputs.text_color }}
+        INPUT_MUTED_COLOR: ${{ inputs.muted_color }}
+        INPUT_DIVIDER_COLOR: ${{ inputs.divider_color }}
+        INPUT_OUTPUT_DIR: ${{ inputs.output_dir }}
+      run: PYTHONPATH=${{ github.action_path }}/src python3 ${{ github.action_path }}/src/metrics/generate.py
 
-    - uses: ./actions/update-readme
-      with:
-        output_dir: ${{ inputs.output_dir }}
-        readme_path: ${{ inputs.readme_path }}
+    - name: Update README
+      shell: bash
+      env:
+        INPUT_OUTPUT_DIR: ${{ inputs.output_dir }}
+        INPUT_README_PATH: ${{ inputs.readme_path }}
+      run: |
+        if [ -n "$INPUT_README_PATH" ]; then
+          python3 ${{ github.action_path }}/src/update_readme.py
+        fi
 
 branding:
   icon: bar-chart-2
