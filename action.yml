@@ -9,6 +9,10 @@ inputs:
   username:
     description: GitHub username
     required: true
+  output_dir:
+    description: Base output directory - stats/ and metrics/ subfolders are created automatically
+    required: false
+    default: 'assets'
   start_date:
     description: Date you started programming in YYYY-MM-DD format (optional - if omitted, years experience stat is hidden)
     required: false
@@ -37,55 +41,43 @@ inputs:
     description: Divider line color (hex) - overrides theme
     required: false
     default: ''
-  stats_file:
-    description: Output path for stats SVG - omit to skip stats generation
+  readme_path:
+    description: Path to the README file to auto-update with responsive <picture> elements (set to '' to skip)
     required: false
-    default: ''
-  metrics_file:
-    description: Output path for metrics SVG - omit to skip metrics generation
-    required: false
-    default: ''
+    default: 'README.md'
 
 runs:
   using: composite
   steps:
-    - name: Validate inputs
-      if: ${{ inputs.stats_file == '' && inputs.metrics_file == '' }}
-      shell: bash
-      run: |
-        echo "::error::At least one of stats_file or metrics_file must be set."
-        exit 1
+    - uses: ./actions/generate-stats
+      with:
+        token: ${{ inputs.token }}
+        username: ${{ inputs.username }}
+        start_date: ${{ inputs.start_date }}
+        output_dir: ${{ inputs.output_dir }}
+        theme: ${{ inputs.theme }}
+        primary_color: ${{ inputs.primary_color }}
+        bg_color: ${{ inputs.bg_color }}
+        text_color: ${{ inputs.text_color }}
+        muted_color: ${{ inputs.muted_color }}
+        divider_color: ${{ inputs.divider_color }}
 
-    - name: Generate stats SVG
-      if: ${{ inputs.stats_file != '' }}
-      shell: bash
-      env:
-        GH_TOKEN: ${{ inputs.token }}
-        INPUT_USERNAME: ${{ inputs.username }}
-        INPUT_START_DATE: ${{ inputs.start_date }}
-        INPUT_THEME: ${{ inputs.theme }}
-        INPUT_PRIMARY_COLOR: ${{ inputs.primary_color }}
-        INPUT_BG_COLOR: ${{ inputs.bg_color }}
-        INPUT_TEXT_COLOR: ${{ inputs.text_color }}
-        INPUT_MUTED_COLOR: ${{ inputs.muted_color }}
-        INPUT_DIVIDER_COLOR: ${{ inputs.divider_color }}
-        INPUT_STATS_FILE: ${{ inputs.stats_file }}
-      run: PYTHONPATH=${{ github.action_path }}/src python3 ${{ github.action_path }}/src/stats/generate.py
+    - uses: ./actions/generate-metrics
+      with:
+        token: ${{ inputs.token }}
+        username: ${{ inputs.username }}
+        output_dir: ${{ inputs.output_dir }}
+        theme: ${{ inputs.theme }}
+        primary_color: ${{ inputs.primary_color }}
+        bg_color: ${{ inputs.bg_color }}
+        text_color: ${{ inputs.text_color }}
+        muted_color: ${{ inputs.muted_color }}
+        divider_color: ${{ inputs.divider_color }}
 
-    - name: Generate metrics SVG
-      if: ${{ inputs.metrics_file != '' }}
-      shell: bash
-      env:
-        GH_TOKEN: ${{ inputs.token }}
-        INPUT_USERNAME: ${{ inputs.username }}
-        INPUT_THEME: ${{ inputs.theme }}
-        INPUT_PRIMARY_COLOR: ${{ inputs.primary_color }}
-        INPUT_BG_COLOR: ${{ inputs.bg_color }}
-        INPUT_TEXT_COLOR: ${{ inputs.text_color }}
-        INPUT_MUTED_COLOR: ${{ inputs.muted_color }}
-        INPUT_DIVIDER_COLOR: ${{ inputs.divider_color }}
-        INPUT_METRICS_FILE: ${{ inputs.metrics_file }}
-      run: PYTHONPATH=${{ github.action_path }}/src python3 ${{ github.action_path }}/src/metrics/generate.py
+    - uses: ./actions/update-readme
+      with:
+        output_dir: ${{ inputs.output_dir }}
+        readme_path: ${{ inputs.readme_path }}
 
 branding:
   icon: bar-chart-2
