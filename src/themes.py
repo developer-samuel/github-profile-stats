@@ -1,27 +1,14 @@
 import os
+import tomllib
+from pathlib import Path
 
-THEMES = {
-    "dark": {
-        "primary": "#0969da",
-        "bg": "#0d1117",
-        "text": "#8b949e",
-        "muted": "#484f58",
-        "divider": "#21262d",
-    },
-    "light": {
-        "primary": "#0969da",
-        "bg": "#ffffff",
-        "text": "#57606a",
-        "muted": "#6e7781",
-        "divider": "#d0d7de",
-    },
-}
+_toml = Path(__file__).parent / "themes.toml"
+THEMES = tomllib.loads(_toml.read_text())
 
 
 def resolve_colors() -> dict[str, str]:
-    """Returns colors merged from theme + any individual overrides."""
     theme_name = os.environ.get("INPUT_THEME", "dark").strip().lower()
-    base = THEMES.get(theme_name, THEMES["dark"]).copy()
+    base: dict[str, str] = (THEMES.get(theme_name) or THEMES["dark"]).copy()
 
     overrides = {
         "primary": os.environ.get("INPUT_PRIMARY_COLOR", "").strip(),

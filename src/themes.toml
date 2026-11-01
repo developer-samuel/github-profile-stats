@@ -1,13 +1,13 @@
 [dark]
-primary = "#0969da"
-bg      = "#0d1117"
+primary = "#01ff5e"
+bg      = "none"
 text    = "#8b949e"
 muted   = "#484f58"
 divider = "#21262d"
 
 [light]
-primary = "#0969da"
-bg      = "#ffffff"
+primary = "#01ff5e"
+bg      = "none"
 text    = "#57606a"
 muted   = "#6e7781"
 divider = "#d0d7de"

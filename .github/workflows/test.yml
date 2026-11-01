@@ -15,19 +15,16 @@ jobs:
       - uses: ./
         with:
           token: ${{ secrets.STATS_TOKEN }}
-          username: developer-samuel
+          username: ${{ github.repository_owner }}
           start_date: '2017-09-01'
           theme: dark
-          primary_color: '#01FF5E'
-          stats_file: assets/stats.svg
-          metrics_file: assets/metrics.svg
 
       - name: Commit if changed
         run: |
-          git config user.name  "github-actions[bot]"
+          git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add assets/stats.svg assets/metrics.svg
+          git add assets/ README.md
           git diff --cached --quiet || (
-            git commit -m "chore: update test stats" &&
+            git commit -m "chore: update profile stats" &&
             git push
           )
