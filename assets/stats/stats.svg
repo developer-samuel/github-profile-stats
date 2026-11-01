@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 120" width="640" height="93">
+  <rect width="820" height="120" fill="none"/>
+  <line x1="273" y1="15" x2="273" y2="105" stroke="#21262d" stroke-width="1"/>
+  <line x1="546" y1="15" x2="546" y2="105" stroke="#21262d" stroke-width="1"/>
+  <text font-family="'Courier New', Courier, monospace" x="136" y="38" text-anchor="middle" fill="#484f58" font-size="20">years experience</text>
+  <text font-family="'Courier New', Courier, monospace" x="136" y="96" text-anchor="middle" fill="#01ff5e" font-size="46" font-weight="bold">9+</text>
+  <text font-family="'Courier New', Courier, monospace" x="409" y="38" text-anchor="middle" fill="#484f58" font-size="20">commits</text>
+  <text font-family="'Courier New', Courier, monospace" x="409" y="96" text-anchor="middle" fill="#01ff5e" font-size="46" font-weight="bold">3,010</text>
+  <text font-family="'Courier New', Courier, monospace" x="682" y="38" text-anchor="middle" fill="#484f58" font-size="20">stars</text>
+  <text font-family="'Courier New', Courier, monospace" x="682" y="96" text-anchor="middle" fill="#01ff5e" font-size="46" font-weight="bold">5</text>
+</svg>
